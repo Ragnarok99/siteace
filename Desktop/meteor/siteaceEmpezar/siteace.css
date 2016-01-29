@@ -1,0 +1,44 @@
+#errorWebsite{
+	display: none;
+	color: red;
+	font-weight: bold;
+	
+}
+#title{
+	font-style: italic;
+	font-weight: bold;
+}
+
+#title:hover{
+	color: #2196f3;
+	text-decoration: none;
+
+}/* CSS declarations go here */
+
+.creado{
+	color: #757575;
+	font-size: 15px;
+}
+.description{
+	color: #757575;
+	font-size: 20px;
+}
+
+.details{
+	color: #009688 ;
+	font-size: 20px;
+	text-decoration: none;
+
+}
+.details:hover{
+	color: #ef5350 ;
+}
+
+.hidden_div{
+	display:none;
+}
+
+.votes{
+	font-style: italic;
+}
+

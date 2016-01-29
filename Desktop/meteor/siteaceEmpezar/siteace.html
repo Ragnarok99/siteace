@@ -1,0 +1,227 @@
+<head>
+  <title>siteace</title>
+</head>
+
+<body>
+	<!-- navbar  - you will be putting the login functions here 
+	
+
+	<div class="container">
+		{{> website_form}}
+		{{> website_list}}
+	</div>-->
+
+
+</body>
+
+<template name = "layoutApplication">
+	<div class="container">	
+		{{>yield "navbar" }}
+		{{>yield "form" }}
+		{{>yield "main" }}
+
+	</div>
+</template>
+
+<template name="details">
+
+	<!-- Modal comments-->
+<div id="modalComment" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create an account or sign in</h4>
+      </div>
+      <div class="modal-body">
+        <p>Hey! you must be logged in for comment this website!.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+	{{#with website}}
+
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+		 	<div class="panel-heading">
+	    		<h3 class="panel-title"><a id="title" href="{{url}}">{{title}}</a></h3>
+	  		</div>
+		 	<div class="panel-body">
+		 		<div class="panel panel-default">
+		 	<div class="panel-heading">
+		 		<form class="js-save-comment">
+	    		<div class="input-group">
+				  <input id="comment" type="text" placeholder="escribe un comentario..." class="form-control" aria-label="...">
+				  <div class="input-group-btn">
+				    <button type="submit" class="btn btn-success">enviar</button>
+				  </div>
+
+				</div>
+			</form>
+
+	  		</div>
+		 	<div class="panel-body">
+		 	{{#each comments}}
+		 	<div class="panel panel-default">
+		 		<div class="panel-heading">
+		 			<a href="#">{{getUser createdBy}}</a> {{description}}
+		 			<p>{{getTime createdOn}}</p>
+		 		</div>
+		 	</div>
+		 	
+		 	{{/each}}
+			</div>
+		</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	{{/with}}
+</template>
+<template name="navbar">
+	{{>loginButtons}}
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="/">
+	        Site Ace
+	      </a>
+	    </div>
+	    <form class="js-search-website navbar-form navbar-left" role="search">
+	    		<div class="input-group">
+				  <input id="search" type="text" placeholder="search a website..." class="js-search-input form-control" aria-label="...">
+				  <div class="input-group-btn">
+				    <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+				  </div>
+
+				</div>
+			</form>
+	  </div>
+	</nav>
+</template>
+
+<template name="website_form">
+		<!-- Modal website form-->
+<div id="modalFormWebsite" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create an account or sign in</h4>
+      </div>
+      <div class="modal-body">
+        <p>Hey! you must be logged in for add this website!.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+	<span><a class="btn btn-default js-toggle-website-form" href="#">
+  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	</a></span>
+	
+
+	<div id="website_form" class="hidden_div">
+		<form class="js-save-website-form">
+			<div class="form-group">
+			<input id="errorWebsite" type="text" class="form-control" disabled>
+			</div>
+
+		  <div class="form-group">
+		    <label for="url">Site address</label>
+		    <div class="input-group">
+				  <input id="url" type="url" placeholder="http://www.mysite.com" class="form-control " aria-label="...">
+				  <div class="input-group-btn">
+				    <button type="submit" class="js-url-http btn"><span class="glyphicon glyphicon-search"></span></button>
+				  </div>
+
+				</div>
+		  </div>
+
+		
+		  <div class="form-group">
+		    <label for="title">Title</label>
+		    <input type="text" class="form-control" id="title" placeholder="Mysite" disabled>
+		  </div>
+		    <div class="form-group">
+		    <label for="description">Description</label>
+		    <input type="text" class="form-control" id="description" placeholder="I found this site really useful for ..." >
+		  </div>
+
+		  <button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+</template>
+
+<!-- template that displays several website items -->
+<template name="website_list">
+	<ol>
+	{{#each websites}}
+	{{>website_item}}
+	{{/each}}
+	</ol>
+</template>
+
+<!-- template that displays individual website entries -->
+<template name="website_item">
+	<!-- Modal Websites-->
+<div id="modalWebsite" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create an account or sign in</h4>
+      </div>
+      <div class="modal-body">
+        <p>Hey! you must be logged in for rate this website.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="panel panel-default">
+	 <div class="panel-heading">
+    <h3 class="panel-title"><a id="title" href="{{url}}">{{title}}</a></h3>
+  </div>
+  <div class="panel-body">
+	<p class="description">
+		{{description}}
+	</p>
+	<a href="#" class="btn btn-default js-upvote">
+		<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+	</a>
+	<a href="#" class="btn btn-default js-downvote">
+		<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+	</a>
+	<p>
+		<a class="js-get-details details" href="/details">details</a>
+	</p>
+	<p><span class="votes">votes Up</span> <span class="badge">{{votesUp}}</span></p>
+	<p><span class="votes">votes Down</span> <span class="badge"> {{votesDown}}</span></p>
+	<p class="creado">
+		Created on {{getDateCreated createdOn}}
+	</p>
+	<!-- you will be putting your up and down vote buttons in here! -->
+
+  </div>
+</div>
+</template>
